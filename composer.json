@@ -1,0 +1,16 @@
+{
+    "name": "fweber-de/site-heartbeat-reporter",
+    "authors": [
+        {
+            "name": "Florian Weber",
+            "email": "florian.weber.dd@me.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^3.3",
+        "symfony/http-foundation": "^3.3",
+        "seld/jsonlint": "^1.6",
+        "symfony/yaml": "^3.3",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
