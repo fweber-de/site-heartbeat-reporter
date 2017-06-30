@@ -1,1 +1,4 @@
 /vendor/
+/config/app.yml
+/config/sites.yml
+/data/*

@@ -1,0 +1,9 @@
+sites:
+    - key1:
+        key: site2
+        secret: null
+        diff: null
+    - key2:
+        title: site2
+        secret: null
+        diff: null
