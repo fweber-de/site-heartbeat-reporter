@@ -2,3 +2,4 @@
 /config/app.yml
 /config/sites.yml
 /data/*
+!.gitkeep
