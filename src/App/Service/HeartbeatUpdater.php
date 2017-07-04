@@ -23,11 +23,11 @@ final class HeartbeatUpdater
     {
         $site = $this->getSite($key);
 
-        if(!$site) {
+        if (!$site) {
             throw new \Exception('site unknown');
         }
 
-        if($secret === $site->getSecret()) {
+        if ($secret === $site->getSecret()) {
             return true;
         }
 
@@ -78,7 +78,7 @@ final class HeartbeatUpdater
     {
         $store = @file_get_contents($this->dataFilePath);
 
-        if($store == '') {
+        if ($store == '') {
             $store = '[]';
         }
 
@@ -93,7 +93,7 @@ final class HeartbeatUpdater
     {
         $store = @file_get_contents($this->dataFilePath);
 
-        if($store == '') {
+        if ($store == '') {
             throw new \Exception('site not seen');
         }
 

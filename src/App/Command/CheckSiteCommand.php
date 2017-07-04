@@ -29,7 +29,7 @@ final class CheckSiteCommand extends Command
 
         $site = $this->get('app.updater')->getSite($input->getArgument('site_key'));
 
-        if(!$site) {
+        if (!$site) {
             throw new \Exception('site not found');
         }
 
@@ -40,14 +40,14 @@ final class CheckSiteCommand extends Command
 
         $io->writeln($lastType);
 
-        if($diff < $site->getDiff()) {
-            if($lastType != 'online') {
+        if ($diff < $site->getDiff()) {
+            if ($lastType != 'online') {
                 $this->get('app.notifier')->siteOnline($site);
             }
 
             $io->success(sprintf('site %s online', $site->getTitle()));
         } else {
-            if($lastType != 'offline') {
+            if ($lastType != 'offline') {
                 $this->get('app.notifier')->siteOffline($site, $diff);
             }
 

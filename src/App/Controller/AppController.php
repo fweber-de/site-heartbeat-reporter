@@ -16,14 +16,14 @@ final class AppController extends Controller
     {
         try {
             $source = $this->parseJson($request->getContent());
-        } catch(ParsingException $p) {
+        } catch (ParsingException $p) {
             return $this->json([
                 'status' => 'error',
                 'message' => 'json error',
             ], 400);
         }
 
-        if(!$this->get('app.updater')->verify($source->app_key, $source->secret)) {
+        if (!$this->get('app.updater')->verify($source->app_key, $source->secret)) {
             return $this->json([
                 'status' => 'error',
                 'message' => 'verification failed',

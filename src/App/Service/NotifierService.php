@@ -23,7 +23,7 @@ final class NotifierService
 
     public function siteOffline(Site $site, $timeDiffInSeconds)
     {
-        if($this->notifySlack) {
+        if ($this->notifySlack) {
             $this->slack->send([
                 'message' => '',
                 'username' => 'Site Monitor',
@@ -43,7 +43,7 @@ final class NotifierService
 
     public function siteOnline(Site $site)
     {
-        if($this->notifySlack) {
+        if ($this->notifySlack) {
             $this->slack->send([
                 'message' => '',
                 'username' => 'Site Monitor',
