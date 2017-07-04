@@ -1,2 +1,3 @@
 config:
-    slack: null
+    slack_url: null
+    notify.slack: false

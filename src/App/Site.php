@@ -10,6 +10,7 @@ final class Site
     private $appKey;
     private $secret;
     private $title;
+    private $diff;
 
     public function getAppKey()
     {
@@ -43,6 +44,18 @@ final class Site
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDiff()
+    {
+        return $this->diff;
+    }
+
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
 
         return $this;
     }

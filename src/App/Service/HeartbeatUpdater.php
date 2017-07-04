@@ -36,6 +36,46 @@ final class HeartbeatUpdater
 
     public function update($key)
     {
+        $site = $this->getSite($key);
+        $this->setDataOnSite($site, 'last_contact', (new \DateTime())->getTimestamp());
+
+        return $this;
+    }
+
+    public function setLastNotificationDate(Site $site, \DateTime $date = null)
+    {
+        $date = $date ?? new \DateTime('01.01.1970');
+        $this->setDataOnSite($site, 'last_notified', $date->getTimestamp());
+    }
+
+    public function getLastNotificationDate(Site $site) : \DateTime
+    {
+        $c = new \DateTime();
+        $c->setTimestamp($this->getDataFromSite($site, 'last_notified'));
+
+        return $c;
+    }
+
+    public function setLastNotificationType(Site $site, $type)
+    {
+        $this->setDataOnSite($site, 'last_notification_type', $type);
+    }
+
+    public function getLastNotificationType(Site $site)
+    {
+        return $this->getDataFromSite($site, 'last_notification_type') ?? null;
+    }
+
+    public function getLastContactOfSite(Site $site) : \DateTime
+    {
+        $c = new \DateTime();
+        $c->setTimestamp($this->getDataFromSite($site, 'last_contact'));
+
+        return $c;
+    }
+
+    private function setDataOnSite(Site $site, $key, $value)
+    {
         $store = @file_get_contents($this->dataFilePath);
 
         if($store == '') {
@@ -44,11 +84,22 @@ final class HeartbeatUpdater
 
         $store = json_decode($store, true);
 
-        $store['site_'.$key]['last_contact'] = new \DateTime();
+        $store['site_'.$site->getAppKey()][$key] = $value;
 
         file_put_contents($this->dataFilePath, json_encode($store));
+    }
 
-        return $this;
+    private function getDataFromSite(Site $site, $key)
+    {
+        $store = @file_get_contents($this->dataFilePath);
+
+        if($store == '') {
+            throw new \Exception('site not seen');
+        }
+
+        $store = json_decode($store, true);
+
+        return $store['site_'.$site->getAppKey()][$key] ?? null;
     }
 
     public function getSites()
@@ -67,6 +118,7 @@ final class HeartbeatUpdater
                     ->setAppKey($key)
                     ->setSecret($site['secret'])
                     ->setTitle($site['title'])
+                    ->setDiff($site['diff'])
                 ;
             }
         }

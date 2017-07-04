@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Yaml\Yaml;
 
 //read config
@@ -33,6 +34,18 @@ $container
 
 $container
     ->register('app.secure_string', 'App\Service\SecureStringService')
+;
+
+$container
+    ->register('app.slack', 'App\Service\SlackService')
+    ->addArgument('%app.slack_url%')
+;
+
+$container
+    ->register('app.notifier', 'App\Service\NotifierService')
+    ->addArgument(new Reference('app.updater'))
+    ->addArgument(new Reference('app.slack'))
+    ->addArgument('%app.notify.slack%')
 ;
 
 $container->compile();
