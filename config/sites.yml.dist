@@ -1,6 +1,6 @@
 sites:
     - key1:
-        key: site2
+        title: site1
         secret: null
         diff: null
     - key2:
