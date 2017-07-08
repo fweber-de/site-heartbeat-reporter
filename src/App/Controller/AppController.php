@@ -37,4 +37,28 @@ final class AppController extends Controller
             'message' => 'updated successfully',
         ]);
     }
+
+    public function showHeartbeatAction(Request $request)
+    {
+        $key = $request->get('key');
+        $secret = $request->get('secret');
+
+        if (!$this->get('app.updater')->verify($key, $secret)) {
+            return $this->json([
+                'status' => 'error',
+                'message' => 'verification failed',
+            ], 403);
+        }
+
+        $site = $this->get('app.updater')->getSite($key);
+
+        return $this->json([
+            'site' => $site->toArray(),
+            'data' => [
+                'last_contact' => $this->get('app.updater')->getLastContactOfSite($site),
+                'last_notification_type' => $this->get('app.updater')->getLastNotificationType($site),
+                'last_notified' => $this->get('app.updater')->getLastNotificationDate($site),
+            ]
+        ]);
+    }
 }
