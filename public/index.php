@@ -26,6 +26,13 @@ if($request->get('p') == 'update') {
     $controller->setContainer($container);
 
     $response = $controller->updateHeartbeatAction($request);
+} else if($request->get('p') == 'show') {
+    checkMethod($request->getMethod(), ['GET']);
+
+    $controller = new AppController();
+    $controller->setContainer($container);
+
+    $response = $controller->showHeartbeatAction($request);
 } else {
     $data = json_encode([
         'status' => 'error',

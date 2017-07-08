@@ -59,4 +59,14 @@ final class Site
 
         return $this;
     }
+
+    public function toJson()
+    {
+        return json_encode($this->toArray());
+    }
+
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
 }
