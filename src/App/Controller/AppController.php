@@ -61,4 +61,27 @@ final class AppController extends Controller
             ]
         ]);
     }
+
+    public function statusAction(Request $request)
+    {
+        $key = $request->get('key');
+        $secret = $request->get('secret');
+
+        if (!$this->get('app.updater')->verify($key, $secret)) {
+            return $this->json([
+                'status' => 'error',
+                'message' => 'verification failed',
+            ], 403);
+        }
+
+        $site = $this->get('app.updater')->getSite($key);
+        $lastContact = $this->get('app.updater')->getLastContactOfSite($site);
+        $diff = (new \DateTime())->getTimestamp() - $lastContact->getTimestamp();
+
+        if ($diff < $site->getDiff()) {
+            return $this->json(['status' => 'site online']);
+        } else {
+            return $this->json(['status' => 'site offline'], 500);
+        }
+    }
 }

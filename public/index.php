@@ -33,6 +33,13 @@ if($request->get('p') == 'update') {
     $controller->setContainer($container);
 
     $response = $controller->showHeartbeatAction($request);
+} else if($request->get('p') == 'status') {
+    checkMethod($request->getMethod(), ['GET']);
+
+    $controller = new AppController();
+    $controller->setContainer($container);
+
+    $response = $controller->statusAction($request);
 } else {
     $data = [
         'status' => 'error',
