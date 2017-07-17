@@ -34,13 +34,13 @@ if($request->get('p') == 'update') {
 
     $response = $controller->showHeartbeatAction($request);
 } else {
-    $data = json_encode([
+    $data = [
         'status' => 'error',
         'message' => 'no such action',
         'code' => 404,
-    ]);
+    ];
 }
 
-($response ?? new Response($data, $data['code'] ?? 200, [
+($response ?? new Response(json_encode($data), $data['code'] ?? 200, [
     'Content-Type' => $contentType ?? 'application/json'
 ]))->send();
