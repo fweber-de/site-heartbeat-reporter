@@ -51,6 +51,8 @@ $container
     ->addArgument(new Reference('app.updater'))
     ->addArgument(new Reference('app.slack'))
     ->addArgument('%app.notify.slack%')
+    ->addArgument(new Reference('app.ifttt_webhook'))
+    ->addArgument('%app.notify.ifttt_webhook%')
 ;
 
 $container->compile();
