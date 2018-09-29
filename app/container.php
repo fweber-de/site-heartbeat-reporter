@@ -42,6 +42,11 @@ $container
 ;
 
 $container
+    ->register('app.ifttt_webhook', 'App\Service\IftttWebhook')
+    ->addArgument('%app.ifttt_webhook_url%')
+;
+
+$container
     ->register('app.notifier', 'App\Service\NotifierService')
     ->addArgument(new Reference('app.updater'))
     ->addArgument(new Reference('app.slack'))
