@@ -1,3 +1,5 @@
 config:
     slack_url: null
     notify.slack: false
+    ifttt_webhook_url: null
+    notify.ifttt_webhook: false

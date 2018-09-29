@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Service\NotificationServiceInterface;
 use GuzzleHttp\Client as Guzzle;
 
 /**

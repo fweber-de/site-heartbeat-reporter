@@ -38,8 +38,6 @@ final class CheckSiteCommand extends Command
         $diff = (new \DateTime())->getTimestamp() - $lastContact->getTimestamp();
         $lastType = $this->get('app.updater')->getLastNotificationType($site);
 
-        $io->writeln($lastType);
-
         if ($diff < $site->getDiff()) {
             if ($lastType != 'online') {
                 $this->get('app.notifier')->siteOnline($site);

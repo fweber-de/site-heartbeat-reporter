@@ -3,3 +3,4 @@
 /config/sites.yml
 /data/*
 !.gitkeep
+/.idea/
