@@ -42,7 +42,7 @@ $container
 ;
 
 $container
-    ->register('app.ifttt_webhook', 'App\Service\IftttWebhook')
+    ->register('app.ifttt_webhook', 'App\Service\IftttWebhookService')
     ->addArgument('%app.ifttt_webhook_url%')
 ;
 
