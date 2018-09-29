@@ -43,7 +43,7 @@ final class IftttWebhookService implements NotificationServiceInterface
 
         if(count($data) > 0) {
             $res = $guzzle->request('POST', $this->url, [
-                'body' => json_encode($data),
+                'json' => $data,
             ]);
         } else {
             $res = $guzzle->request('POST', $this->url);
